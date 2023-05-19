@@ -11,4 +11,4 @@ https://github.com/whtnqls124578/express.js-practice/assets/100771469/97d62566-3
 
 <br/>
 
-# mySQL
+# MongoDB
