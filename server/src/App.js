@@ -26,7 +26,7 @@ function App() {
     const personObj = { name: 'subin', age: 29 }
     // 클라이언트 측에서 post 또는 put의 body에 담아 보내는 값을 서버 내에서 해석 가능한 형태로 변형해줘야 사용 가능하다.
     // 이때 필요한게 bodyParser(미들웨어), API 요청에서 받은 body 값을 파싱하는 역할을 수행해준다.
-    const res = await axios.post(`/api/post/one/`, personObj)
+    const res = await axios.post(`/api/post/one/${'subin'} & ${29}`, personObj)
     console.log(res)
   }
 

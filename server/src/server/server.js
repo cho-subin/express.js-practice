@@ -19,7 +19,7 @@ app.get('/api/get/one/:name&:age', (req, res) => {
     res.send({ name: `${name}`, age: `${age}` })
 })
 
-app.post('/api/post/one',(req,res)=>{
+app.post('/api/post/one/:name&:age',(req,res)=>{
     console.log(req.body) // request body
     // {name:'subin', age:29}
     const name = req.params.name
@@ -40,7 +40,7 @@ app.put('/api/put/one/:name',(req,res)=>{
 })
 
 // patch는 부분 수정
-app.patch('/api/patch/one:name',(req,res)=>{
+app.patch('/api/patch/one/:name',(req,res)=>{
     console.log(req.params)
     console.log(req.body)
     console.log(req.body.age)
