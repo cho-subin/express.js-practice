@@ -10,4 +10,5 @@
 https://github.com/whtnqls124578/express.js-practice/assets/100771469/97d62566-35f6-4fc4-bff6-5b00cc9e0214
 
 <br/>
+
 # mySQL
