@@ -6,6 +6,18 @@ const PORT = process.env.PORT || 4000 // PORT번호 4000에 할당
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+const mongoose = require('mongoose'); //mongoose를 import
+
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true });
+
+const db = mongoose.connection;
+// error 이벤트가 발생할 때마다 콜백함수가 호출됨을 의미한다.
+db.on('error', console.error.bind(console, 'connection error'));
+// 이벤트가 한 번만 호출됨을 의미하며, mongodb에 대한 연결이 열려 있을 때, 즉 연결이 성공하면 콜백함수가 호출된다.
+db.once('open', function callback() {
+    console.log("mongo db is connected");
+});
+
 // 서버가 요청 처리하는곳
 app.get('/api/get/person',(req,res)=>{
     // console.log('server:/api/get/person')
