@@ -23,7 +23,7 @@ const mongoUser = require('./mongodb.js');
 
 app.post('/users', mongoUser.createUser)
 
-app.get('/api/users/:name&:age', mongoUser.getUser)
+app.get('/users', mongoUser.getUser)
 
 
 
