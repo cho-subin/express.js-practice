@@ -23,10 +23,10 @@ function App() {
 
   const request3 = async () => {
     alert('요청')
-    const personObj = { name: 'subin', age: 29 }
+    const personObj = { name: 'yoonyoung', age: 26 }
     // 클라이언트 측에서 post 또는 put의 body에 담아 보내는 값을 서버 내에서 해석 가능한 형태로 변형해줘야 사용 가능하다.
     // 이때 필요한게 bodyParser(미들웨어), API 요청에서 받은 body 값을 파싱하는 역할을 수행해준다.
-    const res = await axios.post(`/api/post/one/${'subin'} & ${29}`, personObj)
+    const res = await axios.post(`/users`, personObj)
     console.log(res)
   }
 
@@ -35,7 +35,7 @@ function App() {
     const personObj = {age:27}
     // 클라이언트 측에서 post 또는 put의 body에 담아 보내는 값을 서버 내에서 해석 가능한 형태로 변형해줘야 사용 가능하다.
     // 이때 필요한게 bodyParser(미들웨어), API 요청에서 받은 body 값을 파싱하는 역할을 수행해준다.
-    const res = await axios.put(`/api/put/one/${'yoonyoung'}`, personObj)
+    const res = await axios.put(`/api/users/:${'subin'} & ${'29'}`, personObj)
     console.log(res)
   }
 
@@ -59,7 +59,7 @@ function App() {
     <div className="App">
       <button onClick={() => request1() }>/api/get/person</button>
       <button onClick={() => request2()}>/api/get/one:name&:age</button>
-      <button onClick={() => request3()}>/api/post/one:name&:age</button>
+      <button onClick={() => request3()}>/api/post/users</button>
       <button onClick={() => request4()}>/api/put/one:name&:age</button>
       <button onClick={() => request5()}>/api/patch/one:age</button>
       <button onClick={() => request6()}>/api/delete/one:name&:age</button>
