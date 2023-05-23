@@ -10,8 +10,9 @@ function App() {
 
   const request1 = async() => {
     alert('요청')
-    const res = await axios.get('/api/get/person')
+    const res = await axios.get('/users')
     console.log(res)
+    setPerson(res.data)
   }
 
   const request2 = async () => {
@@ -57,12 +58,22 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => request1() }>/api/get/person</button>
+      <button onClick={() => request1() }>/api/get/users</button>
       <button onClick={() => request2()}>/api/get/one:name&:age</button>
       <button onClick={() => request3()}>/api/post/users</button>
       <button onClick={() => request4()}>/api/put/one:name&:age</button>
       <button onClick={() => request5()}>/api/patch/one:age</button>
       <button onClick={() => request6()}>/api/delete/one:name&:age</button>
+      <div>
+        {person?.map((item, idx)=>{
+          return(
+            <>
+              <h1>name : {item.name}</h1>
+              <h1>age : {item.age}</h1>
+            </>
+          )
+        })}
+      </div>
     </div>
   );
 }

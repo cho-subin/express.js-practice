@@ -36,12 +36,30 @@ const createUser = async (req, res, next) => {
     // 계속 여러 연결이 열려 있는 상태는 효율적이지 못하고 데이터베이스와 이런 방식으로 소통하는것은 올바르지 못하다.
     // 그래서 한개의 신규 document를 추가하면 close()메소드로 연결을 종료해준다.
     // client.close();
+    // 응답
     res.json(newUser);
 };
 
 // [4]
 const getUser = async (req, res, next) => {
+    const client = new MongoClient(url);
 
+    let users;
+
+    try{
+        // 서버 연결
+        await client.connect();
+        const db = client.db();
+        // collection을 검색해서 가져오는데 시간이 걸릴수도 있으니까 비동기
+        // find() 메소드는 특정 데이터를 검색하는 메소드
+        // toArray() 메소드는 배열형태로 문서를 가져오게 한다.
+        users = await db.collection('users').find().toArray();
+    }
+    catch{
+
+    }
+    client.close();
+    res.json(users);
 };
 
 // [3][4]
