@@ -22,4 +22,11 @@ const createUser = async(req, res, next) => {
     res.json(result);
 }
 
+const getUser = async (req, res, next) => {
+    const getUsers = await UserModel.find().exec() // exec() : promiss로 반환하기위해 쓴다.
+
+    res.json(getUsers);
+}
+
 exports.createUser = createUser;
+exports.getUser = getUser;
