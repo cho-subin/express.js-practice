@@ -5,7 +5,8 @@ const app = express() // express 서버 생성
 const PORT = process.env.PORT || 4000 // PORT번호 4000에 할당
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
-const mongoUser = require('./mongodb.js');
+// const mongo = require('./mongodb.js');
+const mongoose = require('./mongoose.js');
 
 // const mongoose = require('mongoose'); //mongoose를 import
 
@@ -21,9 +22,9 @@ const mongoUser = require('./mongodb.js');
 
 // 서버가 요청 처리하는곳
 
-app.post('/users', mongoUser.createUser)
+app.post('/users', mongoose.createUser)
 
-app.get('/users', mongoUser.getUser)
+// app.get('/users', mongoose.getUser)
 
 
 
