@@ -24,7 +24,7 @@ const mongoose = require('./mongoose.js');
 
 app.post('/users', mongoose.createUser)
 
-// app.get('/users', mongoose.getUser)
+app.get('/users', mongoose.getUser)
 
 
 
