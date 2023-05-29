@@ -85,7 +85,7 @@ function App() {
   // 실제로 data 삭제할때는 data의 idx같은 중복이 되지않는 것을 params에 넣어야 함.
   const request6 = async () => {
     alert('요청')
-    const res = await axios.delete(`/api/delete/one/${'yoonyoung'}`)
+    const res = await axios.delete(`/users/delete/${person[0]?._id}`)
     console.log(res)
   }
   
@@ -95,11 +95,11 @@ function App() {
     <div className="App">
       <button onClick={() => request1() }>/api/get/users</button>
       <button onClick={() => request2()}>/api/get/one:idx</button>
-      <button onClick={() => request21()}>/api/get/one:id</button>
+      <button onClick={() => request21()}>/api/get/:id</button>
       <button onClick={() => request3()}>/api/post/users</button>
       <button onClick={() => request4()}>/api/put/one:name&:age</button>
       <button onClick={() => request5()}>/api/patch/one:age</button>
-      <button onClick={() => request6()}>/api/delete/one:name&:age</button>
+      <button onClick={() => request6()}>/api/delete/:id</button>
       <div>
         {person?.map((item, idx)=>{
           return(

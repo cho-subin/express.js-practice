@@ -25,6 +25,8 @@ router.get('/get/:id', mongoose.getUserByIdx);
 
 router.post('/post', mongoose.createUser);
 
+router.delete('/delete/:id', mongoose.deleteUser);
+
 // router.patch('/patch', (req, res, next)=>{
 //     console.log('patch');
 //     res.json({message: 'success!'})
