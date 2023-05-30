@@ -5,36 +5,12 @@ import axios from 'axios';
 function App() {
 
   const [person,setPerson] = useState();
-  const [personIdx,setPersonIdx] = useState();
-  const [personIdx1, setPersonIdx1] = useState();
 
-  // 새로 매길 idx
-  let idx = () => {
-    if (person?.length === undefined || person?.length === null) {
-      setPersonIdx(0);
-    }
-    else{
-      setPersonIdx(person?.length);
-    }
-  }
-  
-  // 기존 idx
-  let idx1 = () => {
-    if (person?.length === undefined || person?.length === null) {
-      setPersonIdx1(0);
-    }
-    else{
-      setPersonIdx1(person?.length-1);
-    }
-  }
   console.log('person',person)
-  console.log('personIdx', personIdx)
-  console.log('personIdx1', personIdx1)
 
-  React.useEffect(()=>{
-    idx();
-    idx1();
-  }, [person])
+  // React.useEffect(()=>{
+  //   request1();
+  // }, [person])
 
   const request1 = async() => {
     alert('요청')
@@ -59,7 +35,7 @@ function App() {
 
   const request3 = async () => {
     alert('요청')
-    const personObj = { idx: personIdx, name: 'subin1', age: 27 }
+    const personObj = { name: 'subin1', age: 27 }
     // 클라이언트 측에서 post 또는 put의 body에 담아 보내는 값을 서버 내에서 해석 가능한 형태로 변형해줘야 사용 가능하다.
     // 이때 필요한게 bodyParser(미들웨어), API 요청에서 받은 body 값을 파싱하는 역할을 수행해준다.
     const res = await axios.post('/users/post', personObj)
@@ -68,10 +44,10 @@ function App() {
 
   const request4 = async () => {
     alert('요청')
-    const personObj = {age:27}
+    const personObj = { name: 'subin2', age: 28 }
     // 클라이언트 측에서 post 또는 put의 body에 담아 보내는 값을 서버 내에서 해석 가능한 형태로 변형해줘야 사용 가능하다.
     // 이때 필요한게 bodyParser(미들웨어), API 요청에서 받은 body 값을 파싱하는 역할을 수행해준다.
-    const res = await axios.put(`/users`, personObj)
+    const res = await axios.put(`/users/put/${person[0]?._id}`, personObj)
     console.log(res)
   }
 

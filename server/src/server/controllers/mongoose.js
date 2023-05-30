@@ -87,6 +87,28 @@ const patchUser = async (req, res, next) => {
     res.json({message : '유저정보 업데이트 성공'});
 }
 
+const putUser = async (req, res, next) => {
+    const id = req.params.id;
+    const { name, age } = req.body;
+
+    try {
+        const updateUser = await UserModel.findOneAndUpdate(
+            { _id: id },
+            { name: name, age: age },
+            { runValidators: true, new: true }
+        );
+        
+        if (!updateUser){
+            return res.status(404).json({message: '해당 유저를 찾을 수 없습니다.'})
+        }
+    } catch (err) {
+        console.log(err);
+        return next(err); // 오류가 발생했을 때 코드 실행 중단.
+    }
+
+    res.json({ message: '유저정보 업데이트 성공' });
+}
+
 const deleteUser = async (req, res, next) => {
     //1. findById()로 삭제할 컬렉션을 찾는다.
     //2. remove()로 삭제
@@ -123,4 +145,5 @@ exports.createUser = createUser;
 exports.getUser = getUser;
 exports.getUserByIdx = getUserByIdx;
 exports.patchUser = patchUser;
+exports.putUser = putUser;
 exports.deleteUser = deleteUser;
