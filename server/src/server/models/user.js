@@ -13,7 +13,6 @@ const Schema = mongoose.Schema;
 
 // 2. mongoose의 스키마는 원한다면 추가적인 프로퍼티도 전달할 수도 있다.
 const userSchema2 = new Schema({
-    idx: { type: Number, required: true },
     name: { type: String, required: true }, //required: true -> 필수 항목
     age : { type: Number, required: true }
 })
