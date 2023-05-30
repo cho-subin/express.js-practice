@@ -77,8 +77,8 @@ function App() {
 
   const request5 = async () => {
     alert('요청')
-    const personObj = {age:25}
-    const res = await axios.patch(`/users/${personIdx1}`, personObj)
+    const personObj = {age:24}
+    const res = await axios.patch(`/users/patch/${person[0]?._id}`, personObj)
     console.log(res)
   }
   

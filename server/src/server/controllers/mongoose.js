@@ -59,12 +59,32 @@ const getUserByIdx = async (req, res, next) => {
     res.json({user: user.toObject({getters: false})});
 }
 
-const updateUser = async (req, res, next) => {
+const patchUser = async (req, res, next) => {
     const id = req.params.id
-    const age = req.body.age
+    const {age} = req.body
+    console.log('age',age)
 
-    const result = await UserModel.updateOne({ id: id }, { $set: age });
-    res.json(result);
+    let user;
+    try{
+        user = await UserModel.findById(id);
+    }
+    catch(err){
+        console.log(err);
+        return next(err); // 오류가 생겼을때 코드 실행 중단.
+    }
+
+    user.age = age;
+
+    try{
+        await user.save();
+    }
+    catch(err){
+        console.log(err);
+        return next(err); // 오류가 생겼을때 코드 실행 중단.
+    }
+
+    // const result = await UserModel.updateOne({ id: id }, { $set: age });
+    res.json({message : '유저정보 업데이트 성공'});
 }
 
 const deleteUser = async (req, res, next) => {
@@ -102,5 +122,5 @@ const deleteUser = async (req, res, next) => {
 exports.createUser = createUser;
 exports.getUser = getUser;
 exports.getUserByIdx = getUserByIdx;
-exports.updateUser = updateUser;
+exports.patchUser = patchUser;
 exports.deleteUser = deleteUser;
