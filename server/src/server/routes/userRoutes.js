@@ -25,6 +25,8 @@ router.get('/get/:id', mongoose.getUserByIdx);
 
 router.post('/post', mongoose.createUser);
 
+router.patch('/patch/:id', mongoose.patchUser);
+
 router.delete('/delete/:id', mongoose.deleteUser);
 
 // router.patch('/patch', (req, res, next)=>{
