@@ -59,31 +59,63 @@ const getUserByIdx = async (req, res, next) => {
     res.json({user: user.toObject({getters: false})});
 }
 
+// const patchUser = async (req, res, next) => {
+//     const id = req.params.id
+//     const {age} = req.body
+//     console.log('age',age)
+
+//     let user;
+//     try{
+//         user = await UserModel.findById(id);
+//     }
+//     catch(err){
+//         console.log(err);
+//         return next(err); // 오류가 생겼을때 코드 실행 중단.
+//     }
+
+//     user.age = age;
+
+//     try{
+//         await user.save();
+//     }
+//     catch(err){
+//         console.log(err);
+//         return next(err); // 오류가 생겼을때 코드 실행 중단.
+//     }
+
+//     res.json({message : '유저정보 업데이트 성공'});
+// }
+
 const patchUser = async (req, res, next) => {
     const id = req.params.id
-    const {age} = req.body
-    console.log('age',age)
+    const {name, age} = req.body
 
-    let user;
     try{
-        user = await UserModel.findById(id);
+        const user = {};
+        // name 및 age 필드를 검사하여 업데이트할 필드를 동적으로 설정해 불필요한 업데이트를 방지
+        if(name){
+            user.name = name;
+        }
+        if(age){
+            user.age = age;
+        }
+        console.log('user',user);
+
+        const updateUser = await UserModel.findOneAndUpdate(
+            {_id: id},
+            user,
+            { new: true}
+        );
+
+        if (!updateUser){
+            return res.status(404).json({ message: '해당 유저를 찾을 수 없습니다.' })
+        }
     }
     catch(err){
         console.log(err);
         return next(err); // 오류가 생겼을때 코드 실행 중단.
     }
 
-    user.age = age;
-
-    try{
-        await user.save();
-    }
-    catch(err){
-        console.log(err);
-        return next(err); // 오류가 생겼을때 코드 실행 중단.
-    }
-
-    // const result = await UserModel.updateOne({ id: id }, { $set: age });
     res.json({message : '유저정보 업데이트 성공'});
 }
 
@@ -97,7 +129,7 @@ const putUser = async (req, res, next) => {
             { name: name, age: age },
             { runValidators: true, new: true }
         );
-        
+
         if (!updateUser){
             return res.status(404).json({message: '해당 유저를 찾을 수 없습니다.'})
         }
